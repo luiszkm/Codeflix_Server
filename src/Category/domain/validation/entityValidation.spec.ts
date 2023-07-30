@@ -64,8 +64,6 @@ describe('Entity validation', () => {
     expect(entity).toBeInstanceOf(EntityValidation);
     expect(entity.description).toBeUndefined();
 
-
-
     entity = new EntityValidation(
       {
         ...ValidCategory,
@@ -84,6 +82,57 @@ describe('Entity validation', () => {
       ValidCategory.id,
     );
     expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+  });
 
+  it('should be not able to validate a entity with invalid is_active', () => {
+    let entity = new EntityValidation(
+      {
+        ...ValidCategory,
+        is_active: null,
+      },
+      ValidCategory.id,
+    );
+    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+    entity = new EntityValidation(
+      {
+        ...ValidCategory,
+        is_active: undefined,
+      },
+      ValidCategory.id,
+    );
+    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+  });
+
+  it('should be not able to validate a entity with invalid created_at', () => {
+    const entity = new EntityValidation(
+      {
+        ...ValidCategory,
+        created_at: undefined,
+      },
+      ValidCategory.id,
+    );
+    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+  });
+
+  it('should be not able to validate a entity with invalid updated_at', () => {
+    const entity = new EntityValidation(
+      {
+        ...ValidCategory,
+        updated_at: undefined,
+      },
+      ValidCategory.id,
+    );
+    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+  });
+  it('should be not able to validate a entity with created_at bigger than update_At', () => {
+    const entity = new EntityValidation(
+      {
+        ...ValidCategory,
+        created_at: new Date(),
+        updated_at: new Date('2021-01-01'),
+      },
+      ValidCategory.id,
+    );
+    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
   });
 });
