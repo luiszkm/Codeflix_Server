@@ -1,7 +1,11 @@
+import { randomUUID } from 'crypto';
+
 export const ValidCategory = {
-  name: "Category Name",
-  description: "Category Description",
+  id: randomUUID(),
+  name: 'Category Name',
+  description: 'Category Description',
   is_active: true,
+  test: 'test',
   created_at: new Date(),
-  updated_at: new Date()
-}
+  updated_at: new Date(),
+};
