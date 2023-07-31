@@ -42,7 +42,12 @@ describe('Category Unit Test', () => {
       updated_at: category.props.updated_at,
     });
   });
-
+  it('should be able to create a new category with valid data', () => {
+    const category = new Category(ValidCategory);
+    expect(category).toBeInstanceOf(Category);
+    expect(category.props).toStrictEqual(ValidCategory);
+  })
+  
   it('getter of name props', () => {
     const category = new Category({ name: 'Category Name' });
 

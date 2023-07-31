@@ -19,6 +19,7 @@ export class EntityValidation {
     this.is_active = is_active;
     this.created_at = created_at;
     this.updated_at = updated_at;
+    
   }
 
   isValidUUID(): boolean {

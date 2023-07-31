@@ -11,15 +11,21 @@ export interface ICategory {
 
 export class Category {
   public readonly id: string;
-
+  entityValidation: EntityValidation;
   constructor(public readonly props: ICategory) {
     this.id = randomUUID();
     this.props.description = this.props.description ?? null;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
     this.props.updated_at = this.props.updated_at ?? new Date();
+    this.Validation();
+    
+  }
 
-    //  new EntityValidation(this.props).Validation();
+
+  Validation (){
+    this.entityValidation = new EntityValidation(this.props, this.id);
+    this.entityValidation.Validation();
   }
 
   get name() {
