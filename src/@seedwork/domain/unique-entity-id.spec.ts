@@ -2,17 +2,17 @@ import { UniqueEntityId } from './unique-entity-id';
 
 describe('UniqueEntityId Test', () => {
   it('id props should be a valid uuid', () => {
+    const validateSpy = jest.spyOn(
+      UniqueEntityId.prototype as any,
+      'ValidateId',
+    );
     const uuid_vo = new UniqueEntityId();
     const isValidUUID = (uuid) => {
       const uuidRegex =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
       return uuidRegex.test(uuid);
     };
-    const validateSpy = jest.spyOn(
-      UniqueEntityId.prototype as any,
-      'ValidateId',
-    );
-    expect(validateSpy).not.toHaveBeenCalled();
+    expect(validateSpy).toHaveBeenCalled();
     expect(isValidUUID(uuid_vo['id'])).toBeTruthy();
   });
   it('should throw error when uuid is invalid', () => {

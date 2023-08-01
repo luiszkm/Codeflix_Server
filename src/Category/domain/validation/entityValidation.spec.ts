@@ -1,13 +1,19 @@
 import { ValidCategory } from '../../utils/validCategory';
 import { EntityValidationErrors } from '../errors/entityValidationErrors';
 import { EntityValidation } from './entityValidation';
-function spyValidateMethod() {
-  return jest.spyOn(EntityValidation.prototype as any, 'Validation');
-}
+
+let spyValidateMethod;
 describe('Entity validation', () => {
+  beforeEach(() => {
+    spyValidateMethod = jest.spyOn(
+      EntityValidation.prototype as any,
+      'Validation',
+    );
+  });
   it('should be able to validate a entity with valid data', () => {
     const entity = new EntityValidation(ValidCategory, ValidCategory.id);
     expect(entity).toBeInstanceOf(EntityValidation);
+    expect(spyValidateMethod).toHaveBeenCalled();
   });
 
   it('should be not able to validate a entity with invalid name', () => {
@@ -21,6 +27,7 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
 
     expect(
       () =>
@@ -32,6 +39,8 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
+
     expect(
       () =>
         new EntityValidation(
@@ -42,6 +51,7 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
   });
 
   it('should be not able to validate a entity with invalid description', () => {
@@ -53,6 +63,7 @@ describe('Entity validation', () => {
       ValidCategory.id,
     );
     expect(entity.description).toBeNull();
+    expect(spyValidateMethod).toHaveBeenCalled();
 
     expect(
       () =>
@@ -64,6 +75,7 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
 
     expect(
       () =>
@@ -75,6 +87,8 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
+
     expect(
       () =>
         new EntityValidation(
@@ -85,6 +99,8 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
+
     expect(
       () =>
         new EntityValidation(
@@ -95,6 +111,7 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
+    expect(spyValidateMethod).toHaveBeenCalled();
   });
 });
 
@@ -109,6 +126,7 @@ it('should be not able to validate a entity with invalid is_active', () => {
         ValidCategory.id,
       ),
   ).toThrowError(EntityValidationErrors);
+  expect(spyValidateMethod).toHaveBeenCalled();
 
   expect(
     () =>
@@ -120,6 +138,7 @@ it('should be not able to validate a entity with invalid is_active', () => {
         ValidCategory.id,
       ),
   ).toThrowError(EntityValidationErrors);
+  expect(spyValidateMethod).toHaveBeenCalled();
 });
 
 it('should be not able to validate a entity with invalid created_at', () => {
@@ -133,6 +152,7 @@ it('should be not able to validate a entity with invalid created_at', () => {
         ValidCategory.id,
       ),
   ).toThrowError(EntityValidationErrors);
+  expect(spyValidateMethod).toHaveBeenCalled();
 });
 
 it('should be not able to validate a entity with invalid updated_at', () => {
@@ -146,6 +166,7 @@ it('should be not able to validate a entity with invalid updated_at', () => {
         ValidCategory.id,
       ),
   ).toThrowError(EntityValidationErrors);
+  expect(spyValidateMethod).toHaveBeenCalled();
 });
 it('should be not able to validate a entity with created_at bigger than update_At', () => {
   expect(
@@ -159,6 +180,5 @@ it('should be not able to validate a entity with created_at bigger than update_A
         ValidCategory.id,
       ),
   ).toThrowError(EntityValidationErrors);
-  const spy = jest.spyOn(EntityValidation.prototype, 'Validation');
-  // expect(spy).toHaveBeenCalled();
+  expect(spyValidateMethod).toHaveBeenCalled();
 });
