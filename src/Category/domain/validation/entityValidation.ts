@@ -19,7 +19,7 @@ export class EntityValidation {
     this.is_active = is_active;
     this.created_at = created_at;
     this.updated_at = updated_at;
-    
+    this.Validation();
   }
 
   isValidUUID(): boolean {
@@ -32,7 +32,7 @@ export class EntityValidation {
     return true;
   }
 
-  Validation() {
+  public Validation() {
     this.isValidUUID();
 
     if (!this.id) {
@@ -48,6 +48,11 @@ export class EntityValidation {
     if (this.description && this.description.length <= 3) {
       throw new EntityValidationErrors(
         'Description must be at least 3 characters',
+      );
+    }
+    if (this.description === undefined) {
+      throw new EntityValidationErrors(
+        'Description is not be undefined ',
       );
     }
 

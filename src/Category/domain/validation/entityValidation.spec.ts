@@ -14,125 +14,121 @@ describe('Entity validation', () => {
     expect(entity.isValidUUID()).toBeFalsy();
   });
   it('should be not able to validate a entity with invalid name', () => {
-    let entity = new EntityValidation(
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
         name: 'a',
       },
       ValidCategory.id,
-    );
-    expect(entity).toBeInstanceOf(EntityValidation);
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+    )).toThrowError(EntityValidationErrors);
 
-    entity = new EntityValidation(
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
         name: 'aa',
       },
       ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-
-    entity = new EntityValidation(
+    )).toThrowError(EntityValidationErrors);
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
         name: 'aaa',
       },
       ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+    )).toThrowError(EntityValidationErrors);
   });
 
+
   it('should be not able to validate a entity with invalid description', () => {
-    let entity = new EntityValidation(
+
+    const entity = new EntityValidation(
       {
         ...ValidCategory,
         description: null,
       },
       ValidCategory.id,
-    );
-    expect(entity).toBeInstanceOf(EntityValidation);
+    )
     expect(entity.description).toBeNull();
 
-    entity = new EntityValidation(
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
         description: undefined,
       },
       ValidCategory.id,
-    );
-    expect(entity).toBeInstanceOf(EntityValidation);
-    expect(entity.description).toBeUndefined();
+    )).toThrowError(EntityValidationErrors);
 
-    entity = new EntityValidation(
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
-        description: 'a',
+        description: "a",
       },
       ValidCategory.id,
-    );
-    expect(entity).toBeInstanceOf(EntityValidation);
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-
-    entity = new EntityValidation(
+    )).toThrowError(EntityValidationErrors);
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
-        description: 'aaa',
+        description: "aa",
       },
       ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-  });
-
-  it('should be not able to validate a entity with invalid is_active', () => {
-    let entity = new EntityValidation(
+    )).toThrowError(EntityValidationErrors);
+    expect(() => new EntityValidation(
       {
         ...ValidCategory,
-        is_active: null,
+        description: "aaa",
       },
       ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-    entity = new EntityValidation(
-      {
-        ...ValidCategory,
-        is_active: undefined,
-      },
-      ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-  });
-
-  it('should be not able to validate a entity with invalid created_at', () => {
-    const entity = new EntityValidation(
-      {
-        ...ValidCategory,
-        created_at: undefined,
-      },
-      ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-  });
-
-  it('should be not able to validate a entity with invalid updated_at', () => {
-    const entity = new EntityValidation(
-      {
-        ...ValidCategory,
-        updated_at: undefined,
-      },
-      ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
-  });
-  it('should be not able to validate a entity with created_at bigger than update_At', () => {
-    const entity = new EntityValidation(
-      {
-        ...ValidCategory,
-        created_at: new Date(),
-        updated_at: new Date('2021-01-01'),
-      },
-      ValidCategory.id,
-    );
-    expect(() => entity.Validation()).toThrowError(EntityValidationErrors);
+    )).toThrowError(EntityValidationErrors);
   });
 });
+
+it('should be not able to validate a entity with invalid is_active', () => {
+  expect(() => new EntityValidation(
+    {
+      ...ValidCategory,
+      is_active: null,
+    },
+    ValidCategory.id,
+  )).toThrowError(EntityValidationErrors);
+
+  expect(() => new EntityValidation(
+    {
+      ...ValidCategory,
+      is_active: undefined,
+    },
+    ValidCategory.id,
+  )).toThrowError(EntityValidationErrors);
+
+});
+
+
+it('should be not able to validate a entity with invalid created_at', () => {
+  expect(() => new EntityValidation(
+    {
+      ...ValidCategory,
+      created_at: undefined,
+    },
+    ValidCategory.id,
+  )).toThrowError(EntityValidationErrors);
+});
+
+it('should be not able to validate a entity with invalid updated_at', () => {
+  expect(() => new EntityValidation(
+    {
+      ...ValidCategory,
+      updated_at: undefined,
+    },
+    ValidCategory.id,
+  )).toThrowError(EntityValidationErrors);
+});
+it('should be not able to validate a entity with created_at bigger than update_At', () => {
+  expect(() => new EntityValidation(
+    {
+      ...ValidCategory,
+      created_at: new Date(),
+      updated_at: new Date('2021-01-01'),
+    },
+    ValidCategory.id,
+  )).toThrowError(EntityValidationErrors)
+});
+
