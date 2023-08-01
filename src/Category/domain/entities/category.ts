@@ -1,5 +1,5 @@
-import { randomUUID } from 'node:crypto';
 import { EntityValidation } from '../validation/entityValidation';
+import {UniqueEntityId} from '../../../@seedwork/domain/unique-entity-id';
 
 export interface ICategory {
   name: string;
@@ -10,10 +10,10 @@ export interface ICategory {
 }
 
 export class Category {
-  public readonly id: string;
+  public readonly id: UniqueEntityId;
   entityValidation: EntityValidation;
-  constructor(public readonly props: ICategory) {
-    this.id = randomUUID();
+  constructor(public readonly props: ICategory, id?: UniqueEntityId) {
+    this.id = id ?? new UniqueEntityId();
     this.props.description = this.props.description ?? null;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
@@ -24,7 +24,7 @@ export class Category {
 
 
   Validation (){
-    this.entityValidation = new EntityValidation(this.props, this.id);
+    this.entityValidation = new EntityValidation(this.props, this.id.toString());
     this.entityValidation.Validation();
   }
 

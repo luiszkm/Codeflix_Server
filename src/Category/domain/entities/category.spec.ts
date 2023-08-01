@@ -53,16 +53,6 @@ describe('Category Unit Test', () => {
 
     expect(category.props.name).toEqual('Category Name');
   });
-  it('id props should be a valid uuid', () => {
-    const category = new Category({ name: 'Category Name' });
-    const isValidUUID = (uuid) => {
-      const uuidRegex =
-        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
-      return uuidRegex.test(uuid);
-    };
-    expect(isValidUUID(category.id)).toBeTruthy();
-    expect(isValidUUID('invalid uuid')).toBeFalsy();
-  });
   it('getter and setter of description props', () => {
     const category = new Category({
       name: 'Category Name',
