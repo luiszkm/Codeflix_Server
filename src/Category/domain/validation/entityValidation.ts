@@ -22,19 +22,7 @@ export class EntityValidation {
     this.Validation();
   }
 
-  isValidUUID(): boolean {
-    const uuidRegex =
-      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
-    if (!uuidRegex.test(this.id)) {
-      return false;
-      throw new Error('Invalid UUID');
-    }
-    return true;
-  }
-
   public Validation() {
-    this.isValidUUID();
-
     if (!this.id) {
       throw new EntityValidationErrors('Id is required');
     }
@@ -51,9 +39,7 @@ export class EntityValidation {
       );
     }
     if (this.description === undefined) {
-      throw new EntityValidationErrors(
-        'Description is not be undefined ',
-      );
+      throw new EntityValidationErrors('Description is not be undefined ');
     }
 
     if (this.is_active === undefined) {

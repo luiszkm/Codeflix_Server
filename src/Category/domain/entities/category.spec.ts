@@ -46,8 +46,8 @@ describe('Category Unit Test', () => {
     const category = new Category(ValidCategory);
     expect(category).toBeInstanceOf(Category);
     expect(category.props).toStrictEqual(ValidCategory);
-  })
-  
+  });
+
   it('getter of name props', () => {
     const category = new Category({ name: 'Category Name' });
 

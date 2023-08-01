@@ -1,5 +1,5 @@
 import { EntityValidation } from '../validation/entityValidation';
-import {UniqueEntityId} from '../../../@seedwork/domain/unique-entity-id';
+import { UniqueEntityId } from '../../../@seedwork/domain/unique-entity-id';
 
 export interface ICategory {
   name: string;
@@ -19,13 +19,13 @@ export class Category {
     this.props.created_at = this.props.created_at ?? new Date();
     this.props.updated_at = this.props.updated_at ?? new Date();
     this.Validation();
-    
   }
 
-
-  Validation (){
-    this.entityValidation = new EntityValidation(this.props, this.id.toString());
-    this.entityValidation.Validation();
+  Validation() {
+    this.entityValidation = new EntityValidation(
+      this.props,
+      this.id.toString(),
+    );
   }
 
   get name() {
