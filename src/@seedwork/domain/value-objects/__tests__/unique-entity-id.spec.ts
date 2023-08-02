@@ -1,4 +1,4 @@
-import { UniqueEntityId } from './unique-entity-id';
+import { UniqueEntityId } from '../unique-entity-id';
 
 const isValidUUID = (uuid: string) => {
   const uuidRegex =
@@ -14,7 +14,7 @@ describe('UniqueEntityId Test', () => {
     const uuid_vo = new UniqueEntityId();
 
     expect(validateSpy).toHaveBeenCalled();
-    expect(isValidUUID(uuid_vo['id'])).toBeTruthy();
+    expect(isValidUUID(uuid_vo.value)).toBeTruthy();
   });
   it('should throw error when uuid is invalid', () => {
     const validateSpy = jest.spyOn(
