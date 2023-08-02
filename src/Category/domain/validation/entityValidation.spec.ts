@@ -9,6 +9,7 @@ describe('Entity validation', () => {
       EntityValidation.prototype as any,
       'Validation',
     );
+    spyValidateMethod.mockClear();
   });
   it('should be able to validate a entity with valid data', () => {
     const entity = new EntityValidation(ValidCategory, ValidCategory.id);
@@ -27,7 +28,7 @@ describe('Entity validation', () => {
           ValidCategory.id,
         ),
     ).toThrowError(EntityValidationErrors);
-    expect(spyValidateMethod).toHaveBeenCalled();
+    expect(spyValidateMethod).toHaveBeenCalledTimes(1);
 
     expect(
       () =>
