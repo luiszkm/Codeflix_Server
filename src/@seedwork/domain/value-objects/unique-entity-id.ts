@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-export class UniqueEntityId {
+export  class UniqueEntityId {
   constructor(private readonly id?: string) {
     this.id = id || randomUUID();
     this.ValidateId();
