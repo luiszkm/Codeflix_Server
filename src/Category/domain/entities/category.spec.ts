@@ -1,6 +1,7 @@
 import { Category } from './category';
 import { ValidCategory } from '../../utils/validCategory';
 
+const created_at = new Date('2020-01-01');
 describe('Category Unit Test', () => {
   it('should be able to create a new category with constructor', () => {
     let category = new Category({ name: 'Category Name' });
@@ -48,10 +49,12 @@ describe('Category Unit Test', () => {
     expect(category.props).toStrictEqual(ValidCategory);
   });
 
-  it('getter of name props', () => {
+  it('getter and setter of name props', () => {
     const category = new Category({ name: 'Category Name' });
 
     expect(category.props.name).toEqual('Category Name');
+    category['name'] = 'Category Name 2';
+    expect(category.props.name).toEqual('Category Name 2');
   });
   it('getter and setter of description props', () => {
     const category = new Category({
@@ -97,5 +100,69 @@ describe('Category Unit Test', () => {
       created_at: dateValid,
     });
     expect(category.props.created_at).toEqual(dateValid);
+  });
+
+  it("should be able to update a category's name", () => {
+    const spy = jest.spyOn(Category.prototype as any, 'Update');
+    const category = new Category({ name: 'Category Name', created_at });
+    category.Update({
+      name: 'Category Name 2',
+      description: category.props.description,
+    });
+    const isUpdated = category.created_at < category.updated_at;
+    expect(isUpdated).toBe(true);
+    expect(category.props.name).toEqual('Category Name 2');
+    expect(spy).toHaveBeenCalled();
+  });
+  it("should be able to update a category's description", () => {
+    const spy = jest.spyOn(Category.prototype as any, 'Update');
+    const category = new Category({
+      name: 'Category Name',
+      description: 'Category Description',
+      created_at,
+    });
+    category.Update({
+      name: category.props.name,
+      description: 'Category Description 2',
+    });
+    const isUpdated = category.created_at < category.updated_at;
+    expect(isUpdated).toBe(true);
+    expect(category.props.description).toEqual('Category Description 2');
+    expect(spy).toHaveBeenCalled();
+  });
+  it("should be able to update a category's name and description", () => {
+    const spy = jest.spyOn(Category.prototype as any, 'Update');
+    const category = new Category({
+      name: 'Category Name',
+      description: 'Category Description',
+      created_at,
+    });
+    category.Update({
+      name: 'Category Name 2',
+      description: 'Category Description 2',
+    });
+    const isUpdated = category.created_at < category.updated_at;
+    expect(category.props.name).toEqual('Category Name 2');
+    expect(category.props.description).toEqual('Category Description 2');
+    expect(isUpdated).toBe(true);
+    expect(spy).toHaveBeenCalled();
+  });
+  it("should be able to update a category's is_active to Active ", () => {
+    const spy = jest.spyOn(Category.prototype as any, 'Activate');
+    const category = new Category({ name: 'Category Name', created_at });
+    category.Activate();
+    const isUpdated = category.created_at < category.updated_at;
+    expect(isUpdated).toBe(true);
+    expect(category.props.is_active).toBe(true);
+    expect(spy).toHaveBeenCalled();
+  });
+  it("should be able to update a category's is_active to Deactivate ", () => {
+    const spy = jest.spyOn(Category.prototype as any, 'Deactivate');
+    const category = new Category({ name: 'Category Name', created_at });
+    category.Deactivate();
+    const isUpdated = category.created_at < category.updated_at;
+    expect(isUpdated).toBe(true);
+    expect(category.props.is_active).toBe(false);
+    expect(spy).toHaveBeenCalled();
   });
 });

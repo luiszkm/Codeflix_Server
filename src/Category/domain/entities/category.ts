@@ -10,6 +10,11 @@ interface ICategory {
   updated_at?: Date;
 }
 
+interface IUpdate {
+  name: string;
+  description: string;
+}
+
 export class Category extends Entity<ICategory> {
   entityValidation: EntityValidation;
   constructor(public readonly props: ICategory, id?: UniqueEntityId) {
@@ -28,8 +33,25 @@ export class Category extends Entity<ICategory> {
     );
   }
 
+  Update({ name, description }: IUpdate): void {
+    this.props.name = name;
+    this.props.description = description;
+    this.props.updated_at = new Date();
+  }
+  Activate() {
+    this.props.is_active = true;
+    this.props.updated_at = new Date();
+  }
+  Deactivate() {
+    this.props.is_active = false;
+    this.props.updated_at = new Date();
+  }
+
   get name() {
     return this.props.name;
+  }
+  private set name(value: string) {
+    this.props.name = value;
   }
   get description() {
     return this.props.description;
