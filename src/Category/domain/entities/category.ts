@@ -1,5 +1,5 @@
 import { EntityValidation } from '../validation/entityValidation';
-import  {UniqueEntityId} from '../../../@seedwork/domain/value-objects/unique-entity-id';
+import { UniqueEntityId } from '../../../@seedwork/domain/value-objects/unique-entity-id';
 
 export interface ICategory {
   name: string;

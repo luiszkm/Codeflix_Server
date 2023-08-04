@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { ValueObject } from './value-object';
 
-export class UniqueEntityId extends ValueObject<string>{
+export class UniqueEntityId extends ValueObject<string> {
   constructor(readonly id?: string) {
     super(id || randomUUID());
     this.ValidateId();
