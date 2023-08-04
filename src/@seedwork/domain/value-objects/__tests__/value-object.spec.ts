@@ -33,20 +33,19 @@ describe('ValueObject Unit Test', () => {
       expect(vo + '').toEqual(value.expected);
     });
   });
-  it("should  be a immutable object", () => {
+  it('should  be a immutable object', () => {
     const obj = {
       prop1: 'value1',
       deep: { prop2: 'value2', prop3: new Date() },
     };
     const vo = new StubValueObject(obj);
 
-    expect(() =>{ 
-      (vo as any).value.prop1 = 'value2'
+    expect(() => {
+      (vo as any).value.prop1 = 'value2';
     }).toThrowError(TypeError);
-    expect(() =>{ 
-      (vo as any).value.deep.prop2 = 'value2'
+    expect(() => {
+      (vo as any).value.deep.prop2 = 'value2';
     }).toThrowError(TypeError);
-    expect( vo.value.deep.prop3).toBeInstanceOf(Date);
-  })
-  
+    expect(vo.value.deep.prop3).toBeInstanceOf(Date);
+  });
 });

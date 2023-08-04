@@ -1,5 +1,12 @@
-import { ICategory } from '../entities/category';
 import { EntityValidationErrors } from '../errors/entityValidationErrors';
+
+interface IInputCategory {
+  name: string;
+  description?: string;
+  is_active?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
+}
 
 export class EntityValidation {
   id: string;
@@ -10,7 +17,7 @@ export class EntityValidation {
   updated_at: Date;
 
   constructor(
-    { name, description, is_active, created_at, updated_at }: ICategory,
+    { name, description, is_active, created_at, updated_at }: IInputCategory,
     id: string,
   ) {
     this.id = id;

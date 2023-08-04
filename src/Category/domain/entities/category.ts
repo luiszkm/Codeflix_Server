@@ -1,7 +1,8 @@
 import { EntityValidation } from '../validation/entityValidation';
 import { UniqueEntityId } from '../../../@seedwork/domain/value-objects/unique-entity-id';
+import { Entity } from '../../../@seedwork/domain/entity/entity';
 
-export interface ICategory {
+interface ICategory {
   name: string;
   description?: string;
   is_active?: boolean;
@@ -9,11 +10,10 @@ export interface ICategory {
   updated_at?: Date;
 }
 
-export class Category {
-  public readonly id: UniqueEntityId;
+export class Category extends Entity<ICategory> {
   entityValidation: EntityValidation;
   constructor(public readonly props: ICategory, id?: UniqueEntityId) {
-    this.id = id ?? new UniqueEntityId();
+    super(props, id);
     this.props.description = this.props.description ?? null;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
