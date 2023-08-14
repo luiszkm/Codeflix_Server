@@ -1,6 +1,7 @@
 import { EntityValidation } from '../validation/entityValidation';
 import { UniqueEntityId } from '../../../@seedwork/domain/value-objects/unique-entity-id';
 import { Entity } from '../../../@seedwork/domain/entity/entity';
+import { ValidatorRules } from '../../../@seedwork/validators/validator-rules';
 
 interface ICategory {
   name: string;
@@ -23,17 +24,15 @@ export class Category extends Entity<ICategory> {
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
     this.props.updated_at = this.props.updated_at ?? new Date();
-    this.Validation();
+    Category.Validate(props);
   }
 
-  Validation() {
-    this.entityValidation = new EntityValidation(
-      this.props,
-      this.id.toString(),
-    );
+  static Validate(props: ICategory) {
+    EntityValidation.Validation(props);
   }
 
   Update({ name, description }: IUpdate): void {
+    Category.Validate({ ...this.props, name, description });
     this.props.name = name;
     this.props.description = description;
     this.props.updated_at = new Date();

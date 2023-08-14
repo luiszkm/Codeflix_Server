@@ -3,13 +3,18 @@ import { ValidCategory } from '../../utils/validCategory';
 
 const created_at = new Date('2020-01-01');
 describe('Category Unit Test', () => {
+  beforeEach(() => {
+    Category.Validate = jest.fn();
+  });
+
   it('should be able to create a new category with constructor', () => {
     let category = new Category({ name: 'Category Name' });
     const dateValid =
       category.props.created_at instanceof Date &&
       category.props.updated_at instanceof Date;
-    expect(dateValid).toBe(true);
 
+    expect(dateValid).toBe(true);
+    expect(Category.Validate).toHaveBeenCalled();
     expect(category.props).toStrictEqual({
       name: 'Category Name',
       description: null,
@@ -48,7 +53,6 @@ describe('Category Unit Test', () => {
     expect(category).toBeInstanceOf(Category);
     expect(category.props).toStrictEqual(ValidCategory);
   });
-
   it('getter and setter of name props', () => {
     const category = new Category({ name: 'Category Name' });
 
@@ -101,7 +105,6 @@ describe('Category Unit Test', () => {
     });
     expect(category.props.created_at).toEqual(dateValid);
   });
-
   it("should be able to update a category's name", () => {
     const spy = jest.spyOn(Category.prototype as any, 'Update');
     const category = new Category({ name: 'Category Name', created_at });
@@ -111,6 +114,7 @@ describe('Category Unit Test', () => {
     });
     const isUpdated = category.created_at < category.updated_at;
     expect(isUpdated).toBe(true);
+    expect(Category.Validate).toHaveBeenCalledTimes(2);
     expect(category.props.name).toEqual('Category Name 2');
     expect(spy).toHaveBeenCalled();
   });
@@ -127,6 +131,7 @@ describe('Category Unit Test', () => {
     });
     const isUpdated = category.created_at < category.updated_at;
     expect(isUpdated).toBe(true);
+    expect(Category.Validate).toHaveBeenCalledTimes(2);
     expect(category.props.description).toEqual('Category Description 2');
     expect(spy).toHaveBeenCalled();
   });
@@ -142,6 +147,7 @@ describe('Category Unit Test', () => {
       description: 'Category Description 2',
     });
     const isUpdated = category.created_at < category.updated_at;
+    expect(Category.Validate).toHaveBeenCalledTimes(2);
     expect(category.props.name).toEqual('Category Name 2');
     expect(category.props.description).toEqual('Category Description 2');
     expect(isUpdated).toBe(true);

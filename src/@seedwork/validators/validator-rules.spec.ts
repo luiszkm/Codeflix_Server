@@ -24,7 +24,7 @@ describe('Validator Rules Test Unit', () => {
     expect(validator['property']).toEqual('field');
   });
 
-  it('should be able to valid the rules - Required Method ',  () => {
+  it('should be able to valid the rules - Required Method ', () => {
     const InvalidArrange = arrange.slice(0, 2);
     InvalidArrange.forEach((item) => {
       expect(() => {
@@ -32,10 +32,10 @@ describe('Validator Rules Test Unit', () => {
       }).toThrow(new ValidationError('The field is required'));
     });
     expect(() => {
-      ValidatorRules.Values('valid', "field").Required();
+      ValidatorRules.Values('valid', 'field').Required();
     }).not.toThrow(new ValidationError('The field is required'));
   });
-  it('should be able to valid the rules - String Method ',  () => {
+  it('should be able to valid the rules - String Method ', () => {
     const InvalidArrange = arrange.slice(3, arrange.length - 1);
 
     InvalidArrange.forEach((item) => {
@@ -44,25 +44,26 @@ describe('Validator Rules Test Unit', () => {
       }).toThrow(new ValidationError('The field must be a string'));
     });
     expect(() => {
-      ValidatorRules.Values('valid', "field").Required();
+      ValidatorRules.Values('valid', 'field').Required();
     }).not.toThrow(new ValidationError('The field is required'));
   });
-  it('should be able to valid the rules - MaxLength Method ',  () => {
+  it('should be able to valid the rules - MaxLength Method ', () => {
     const InvalidArrange = [
       { value: ' ', property: 'field' },
       { value: '12', property: 'field' },
-    ]
+    ];
 
     InvalidArrange.forEach((item) => {
       expect(() => {
         ValidatorRules.Values(item.value, item.property).MaxLength(3);
-      }).toThrow(new ValidationError('The field must be less than 3 characters'));
+      }).toThrow(
+        new ValidationError('The field must be less than 3 characters'),
+      );
     });
     expect(() => {
-      ValidatorRules.Values('valid', "field").MaxLength(3);
-    }).not.toThrow(new ValidationError('The field must be less than 10 characters'));
+      ValidatorRules.Values('valid', 'field').MaxLength(3);
+    }).not.toThrow(
+      new ValidationError('The field must be less than 10 characters'),
+    );
   });
 });
-
-
-
