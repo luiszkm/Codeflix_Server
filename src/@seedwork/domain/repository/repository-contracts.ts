@@ -1,5 +1,5 @@
 import { UniqueEntityId } from "@seedwork/domain/value-objects/unique-entity-id"
-import { Entity } from "../../@seedwork/domain/entity/entity"
+import { Entity } from "../entity/entity"
 
 export interface RepositoryInterface<E extends Entity> {
   Insert(entity: E): Promise<void>
@@ -7,4 +7,7 @@ export interface RepositoryInterface<E extends Entity> {
   FindAll(): Promise<E[]>
   Update(entity: E): Promise<void>
   Delete(id: string | UniqueEntityId): Promise<void>
+}
+export interface ISearchableRepository<E extends Entity,Query, QueryResult> extends RepositoryInterface<E> {
+  Search(query: Query): Promise<QueryResult>
 }

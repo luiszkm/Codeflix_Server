@@ -1,7 +1,7 @@
 import { UniqueEntityId } from "../../@seedwork/domain/value-objects/unique-entity-id";
 import { Entity } from "../../@seedwork/domain/entity/entity";
-import InMemoryRepository from "../repository/in-memory.respository";
-import { NotFoundError } from "./in-memory/not-found.error";
+import {InMemoryRepository} from "../../@seedwork/domain/repository/repository";
+import { NotFoundError } from "../../@seedwork/errors/in-memory/not-found.error";
 import e from "express";
 
 type StubEntityProps = {
