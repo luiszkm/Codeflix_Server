@@ -12,23 +12,29 @@ interface ICategory {
 }
 
 interface IUpdate {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
 }
 
 export class Category extends Entity<ICategory> {
   entityValidation: EntityValidation;
   constructor(public readonly props: ICategory, id?: UniqueEntityId) {
     super(props, id);
+    Category.Validate(props);
     this.props.description = this.props.description ?? null;
     this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
     this.props.updated_at = this.props.updated_at ?? new Date();
-    Category.Validate(props);
   }
 
   static Validate(props: ICategory) {
-    EntityValidation.Validation(props);
+    EntityValidation.Validation({
+      description: props.description,
+      is_active: props.is_active,
+      name: props.name,
+      created_at: props.created_at,
+      updated_at: props.updated_at,
+    });
   }
 
   Update({ name, description }: IUpdate): void {
