@@ -5,13 +5,13 @@ import { NotFoundError } from "../errors/in-memory/not-found.error";
 
 
 export default abstract class InMemoryRepository<E extends Entity> implements RepositoryInterface<E>{
-  items: E[] = [];
+ public items: E[] = [];
 
   async Insert(entity: E): Promise<void> {
     this.items.push(entity);
   }
   async FindByID(id: string | UniqueEntityId): Promise<E> {
-    const _id: string = `${id}`
+    const _id: string = `${id}`    
     return this._get(_id);
   }
   async FindAll(): Promise<E[]> {
