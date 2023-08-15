@@ -1,6 +1,6 @@
 import { notDeepEqual } from "node:assert"
 import { ValidCategory } from "../../utils/validCategory"
-import { EntityValidationErrors } from "../errors/entityValidationErrors"
+import { EntityValidationErrors } from "../../errors/entityValidationErrors"
 import { Category } from "./category"
 
 describe('Category Integration Tests', () => {
@@ -96,14 +96,14 @@ describe('Category Integration Tests', () => {
   it('should not be able updated category with valid name ', () => {
     const entity = new Category(ValidCategory)
     expect(() => {
-      entity.Update({ ...ValidCategory ,name: "valid name"  })
+      entity.Update({ ...ValidCategory, name: "valid name" })
     }).not.toThrow(EntityValidationErrors)
     expect(entity.name).toBe("valid name")
   })
   it('should not be able updated category with valid description ', () => {
     const entity = new Category(ValidCategory)
     expect(() => {
-      entity.Update({ ...ValidCategory , description: "valid description"  })
+      entity.Update({ ...ValidCategory, description: "valid description" })
     }).not.toThrow(EntityValidationErrors)
     expect(entity.description).toBe("valid description")
   })

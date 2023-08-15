@@ -1,7 +1,7 @@
-import { ValidCategory } from '../../utils/validCategory';
+import { ValidCategory } from '../utils/validCategory';
 import { EntityValidationErrors } from '../errors/entityValidationErrors';
 import { EntityValidation } from './entityValidation';
-import { ValidationError } from '../../../@seedwork/errors/validation-error';
+import { ValidationError } from '../../@seedwork/errors/validation-error';
 
 describe('Entity validation', () => {
   it('should be able to validate a entity with valid data', () => {
@@ -23,7 +23,7 @@ describe('Entity validation', () => {
 
   it('should be not able to validate a entity with invalid description', () => {
     const longName = 'a'.repeat(256);
-    const arrange = [undefined, 'a', 'aa', longName ];
+    const arrange = [undefined, 'a', 'aa', longName];
     arrange.forEach((value) => {
       expect(() =>
         EntityValidation.Validation({

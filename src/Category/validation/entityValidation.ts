@@ -33,9 +33,9 @@ export class EntityValidation {
         'updated_at must be greater than created_at',
       );
     }
-    
+
   }
- static ValidateISActive(is_active: boolean) {
+  static ValidateISActive(is_active: boolean) {
     if (is_active === undefined) {
       throw new EntityValidationErrors('is_active is required');
     }
@@ -44,7 +44,7 @@ export class EntityValidation {
     }
   }
 
- static ValidateName(name: string) {
+  static ValidateName(name: string) {
     if (!name || name === typeof Number) {
       throw new EntityValidationErrors('Name is required');
     }
@@ -54,7 +54,7 @@ export class EntityValidation {
     if (name.length > 255) {
       throw new EntityValidationErrors('Name must be at most 255 character');
     }
-    
+
   }
 
   static ValidateDescription(description: string | undefined) {
