@@ -57,7 +57,7 @@ export class SearchParams {
     this._per_page = _per_page
   }
 
-  get sort() {
+  get sort(): string | null {
     return this._sort
   }
   private set sort(value: string | null) {
@@ -65,7 +65,7 @@ export class SearchParams {
       ? null : `${value}`
   }
 
-  get sort_dir() {
+  get sort_dir(): SortDirection | null {
     return this._sort_dir
   }
   private set sort_dir(value: SortDirection | null) {
@@ -77,7 +77,7 @@ export class SearchParams {
     this._sort_dir = dir !== "asc" && dir !== "desc" ? "asc" : dir
   }
 
-  get filter() {
+  get filter(): string | null {
     return this._filter
   }
   private set filter(value: string | null) {
@@ -134,5 +134,6 @@ export interface ISearchableRepository<
   Query = SearchParams,
   QueryResult = SearchResult<E,Filter>
 > extends RepositoryInterface<E> {
+  sortableFields: string[]
   Search(query: Query): Promise<QueryResult>
 }
