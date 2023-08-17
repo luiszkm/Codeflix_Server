@@ -3,7 +3,6 @@ import { ISearchableRepository, RepositoryInterface, SearchParams, SearchResult 
 import { UniqueEntityId } from "@seedwork/domain/value-objects/unique-entity-id";
 import { NotFoundError } from "../../errors/in-memory/not-found.error";
 
-
 export abstract class InMemoryRepository<E extends Entity> implements RepositoryInterface<E>{
   public items: E[] = [];
 
