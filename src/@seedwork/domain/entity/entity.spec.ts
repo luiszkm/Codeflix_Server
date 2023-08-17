@@ -28,7 +28,6 @@ describe('Entity', () => {
   it('should convert a entity to a JSON object', () => {
     const arrange = { prop1: 'prop1 value', prop2: 2 };
     const entity = new StubEntity(arrange);
-    const uniqueEntityId = new UniqueEntityId(entity.id);
     expect(entity.toJSON()).toStrictEqual({ id: entity.id, ...arrange });
   });
 });
