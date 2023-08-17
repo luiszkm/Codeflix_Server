@@ -18,7 +18,7 @@ export abstract class ValueObject<Value = any> {
         return this.value + '';
       }
     }
-    const valueString = this.value.toString();
+    const valueString = `${this.value}`
     return valueString === '[object Object]'
       ? JSON.stringify(this.value)
       : valueString;

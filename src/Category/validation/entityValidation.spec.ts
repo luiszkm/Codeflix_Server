@@ -1,7 +1,6 @@
 import { ValidCategory } from '../utils/validCategory';
 import { EntityValidationErrors } from '../errors/entityValidationErrors';
 import { EntityValidation } from './entityValidation';
-import { ValidationError } from '../../@seedwork/errors/validation-error';
 
 describe('Entity validation', () => {
   it('should be able to validate a entity with valid data', () => {

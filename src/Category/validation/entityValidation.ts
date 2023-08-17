@@ -33,7 +33,6 @@ export class EntityValidation {
         'updated_at must be greater than created_at',
       );
     }
-
   }
   static ValidateISActive(is_active: boolean) {
     if (is_active === undefined) {
@@ -54,7 +53,6 @@ export class EntityValidation {
     if (name.length > 255) {
       throw new EntityValidationErrors('Name must be at most 255 character');
     }
-
   }
 
   static ValidateDescription(description: string | undefined) {
@@ -71,6 +69,5 @@ export class EntityValidation {
     if (description === undefined) {
       throw new EntityValidationErrors('Description is not be undefined ');
     }
-
   }
 }
