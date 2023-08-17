@@ -1,5 +1,3 @@
-import { error } from 'console';
-
 export class EntityValidationErrors extends Error {
   constructor(message?: string, name?: string) {
     super(message);
