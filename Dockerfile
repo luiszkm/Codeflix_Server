@@ -7,4 +7,4 @@ WORKDIR /home/node/app
 
 USER node
 
-CMD [ "sh", "-c", "npm install && tail -f /dev/null" ]
+CMD [ "sh", "-c", "npm run start:dev && tail -f /dev/null" ]
