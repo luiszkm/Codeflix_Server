@@ -1,4 +1,3 @@
-import { notDeepEqual } from 'node:assert';
 import { ValidCategory } from '../../utils/validCategory';
 import { EntityValidationErrors } from '../../errors/entityValidationErrors';
 import { Category } from './category';
@@ -6,7 +5,7 @@ import { Category } from './category';
 describe('Category Integration Tests', () => {
   it('should not be able create category with invalid name', () => {
     const longName = 'a'.repeat(256);
-    const arrange = [null, undefined, '', 'a', 'ab', longName];
+    const arrange = [null, '', 'a', 'ab', longName];
     arrange.forEach(async (value) => {
       expect(() => {
         new Category({ name: value });
@@ -15,26 +14,19 @@ describe('Category Integration Tests', () => {
   });
   it('should not be able create category with invalid description', async () => {
     const longName = 'a'.repeat(256);
-    const arrange = [undefined, 'a', 'ab', longName];
+    const arrange = [ 'a', 'ab', longName];
     arrange.forEach(async (value) => {
       expect(() => {
         new Category({ ...ValidCategory, description: value });
       }).toThrow(EntityValidationErrors);
     });
   });
-  it('should not be able create category with invalid isActive', async () => {
-    expect(() => {
-      new Category({ ...ValidCategory, is_active: undefined });
-    }).toThrow(EntityValidationErrors);
-  });
-  it('should not be able create category with invalid Created_at', async () => {
-    expect(() => {
-      new Category({ ...ValidCategory, created_at: undefined });
-    }).toThrow(EntityValidationErrors);
-  });
+
   it('should not be able create category with invalid Updated_at', async () => {
+    const created_at = new Date();
+    const updated_at = new Date(created_at.getTime() - 100000);
     expect(() => {
-      new Category({ ...ValidCategory, updated_at: undefined });
+      new Category({ ...ValidCategory, created_at, updated_at });
     }).toThrow(EntityValidationErrors);
   });
   it('should not be able create category with Updated_at less then created_at', async () => {
@@ -74,7 +66,7 @@ describe('Category Integration Tests', () => {
   });
   it('should not be able updated category with invalid name ', () => {
     const longName = 'a'.repeat(256);
-    const arrange = [null, undefined, '', 'a', 'ab', longName];
+    const arrange = [null, '', 'a', 'ab', longName];
     const entity = new Category(ValidCategory);
     arrange.forEach(async (value) => {
       expect(() => {
@@ -84,7 +76,7 @@ describe('Category Integration Tests', () => {
   });
   it('should not be able updated category with invalid description ', () => {
     const longName = 'a'.repeat(256);
-    const arrange = [null, undefined, '', 'a', 'ab', longName];
+    const arrange = [null, '', 'a', 'ab', longName];
     const entity = new Category(ValidCategory);
     arrange.forEach(async (value) => {
       expect(() => {

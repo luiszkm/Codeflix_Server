@@ -1,15 +1,27 @@
 import { Category } from '../../domain/entity/category';
 import { InMemorySearchableRepository } from '../../../@seedwork/domain/repository/in-memory.repository';
-import { CategoryRepository } from '../../domain/repository/category.repository';
+import { CategoryRepository } from 'Category/domain/repository/category.repository';
 
-class CategoryInMemoryRepository
+export class CategoryInMemoryRepository
   extends InMemorySearchableRepository<Category>
-  implements CategoryRepository
+  implements CategoryRepository.Repository
 {
-  protected applyFilter(
+  sortableFields: string[] = ['name', 'created_at', ];
+
+  protected async applyFilter(
     items: Category[],
     filter: string,
   ): Promise<Category[]> {
-    throw new Error('Method not implemented.');
+  if (!filter) return items;
+  return items.filter((item) => item.name.toLowerCase().includes(filter.toLowerCase()));
+
+  }
+  protected async applySort(
+    items: Category[], 
+    sort: string, 
+    sort_dir: string): Promise<Category[]> {
+    return !sort 
+    ? super.applySort(items, 'created_at', "desc")
+    : super.applySort(items, sort, sort_dir);
   }
 }

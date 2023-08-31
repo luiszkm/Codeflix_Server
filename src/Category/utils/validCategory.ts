@@ -7,5 +7,5 @@ export const ValidCategory = {
   is_active: true,
   test: 'test',
   created_at,
-  updated_at: new Date(created_at.getTime() + 1000),
+  updated_at: new Date(created_at.getTime() + 100000),
 };
