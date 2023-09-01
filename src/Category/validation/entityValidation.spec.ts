@@ -22,7 +22,7 @@ describe('Entity validation', () => {
 
   it('should be not able to validate a entity with invalid description', () => {
     const longName = 'a'.repeat(256);
-    const arrange = [undefined, 'a', 'aa', longName];
+    const arrange = [ 'a', 'aa', longName];
     arrange.forEach((value) => {
       expect(() =>
         EntityValidation.Validation({

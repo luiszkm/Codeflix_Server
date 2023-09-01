@@ -13,7 +13,7 @@ describe("CategoryOutputMapper", () => {
       updated_at,
     })
     const spy = jest.spyOn(entity, "toJSON")
-    const output = CategoryOutputMapper.toCategoryOutput(entity)
+    const output = CategoryOutputMapper.toOutput(entity)
     expect(spy).toBeCalledTimes(1)
      expect(output).toStrictEqual({
       id: entity.id,

@@ -10,7 +10,7 @@ export type CategoryOutput = {
 }
 
 export class CategoryOutputMapper {
-  static toCategoryOutput(entity: Category): CategoryOutput {
+  static toOutput(entity: Category): CategoryOutput {
     return entity.toJSON() as CategoryOutput
   }
 }

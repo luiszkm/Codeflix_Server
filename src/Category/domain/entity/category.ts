@@ -19,10 +19,10 @@ export class Category extends Entity<ICategory> {
   entityValidation: EntityValidation;
   constructor(public readonly props: ICategory, id?: UniqueEntityId) {
     super(props, id);
-    this.props.description = this.props.description ?? null;
-    this.props.is_active = this.props.is_active ?? true;
     this.props.created_at = this.props.created_at ?? new Date();
     this.props.updated_at = this.props.updated_at ?? new Date();
+    this.props.is_active = this.props.is_active ?? true;
+    this.description = this.props.description;
     Category.Validate(props);
   }
 
@@ -35,11 +35,12 @@ export class Category extends Entity<ICategory> {
       updated_at: props.updated_at,
     });
   }
+ 
 
   Update({ name, description }: IUpdate): void {
-    Category.Validate({ ...this.props, name, description });
-    this.props.name = name;
-    this.props.description = description;
+    Category.Validate({ ...this.props, name, description }); 
+    this.name = name;
+    this.description =  description ?? this.description;
     this.props.updated_at = new Date();
   }
   Activate() {

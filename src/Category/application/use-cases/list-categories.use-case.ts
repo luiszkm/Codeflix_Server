@@ -14,7 +14,7 @@ export class ListCategoriesUseCase
   }
   private toOutput (searchResult: CategoryRepository.SearchResult): output{
     const items = searchResult.items.map(category => {
-      return CategoryOutputMapper.toCategoryOutput(category)
+      return CategoryOutputMapper.toOutput(category)
     })
     return{
       items,
