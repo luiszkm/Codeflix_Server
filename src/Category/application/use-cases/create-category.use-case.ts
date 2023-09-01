@@ -1,6 +1,6 @@
 import { UseCase } from "@seedwork/application/use-case";
-import { Category } from "../../domain/entity/category";
-import { CategoryRepository } from "../../domain/repository/category.repository";
+import { Category } from "Category/domain/entity/category";
+import { CategoryRepository } from "Category/domain/repository/category.repository";
 import { CategoryOutput } from "../dto/category.output";
 
 export class CreateCategoryUseCase 

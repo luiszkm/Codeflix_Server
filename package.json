@@ -61,6 +61,7 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleDirectories": ["node_modules", "src"],
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
