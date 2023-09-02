@@ -1,5 +1,5 @@
 import { Category } from "../../domain/entity/category";
-import { CategoryInMemoryRepository } from "./category-in-memory.repositorie";
+import { CategoryInMemoryRepository } from "./category-in-memory.repository";
 
 describe("CategoryInMemoryRepository", () => {
   let repository: CategoryInMemoryRepository;
@@ -30,9 +30,6 @@ describe("CategoryInMemoryRepository", () => {
   it("should sort by created_at when sort param is null", async () => {
     const created_at = new Date();
     const updated_at = new Date(created_at.getTime() + 10000000);
-    console.log(created_at, updated_at);
-
-
     const items = [
       new Category({ name: "test", created_at: created_at, description: "test", updated_at: updated_at }),
       new Category({

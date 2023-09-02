@@ -66,8 +66,6 @@ export class EntityValidation {
         'Description must be at most 255 character',
       );
     }
-    if (description === undefined) {
-      throw new EntityValidationErrors('Description is not be undefined ');
-    }
+   
   }
 }

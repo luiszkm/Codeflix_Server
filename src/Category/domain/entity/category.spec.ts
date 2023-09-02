@@ -1,5 +1,6 @@
 import { Category } from './category';
 import { ValidCategory } from '../../utils/validCategory';
+import { log } from 'node:console';
 
 const created_at = new Date('2020-01-01');
 describe('Category Unit Test', () => {
@@ -171,4 +172,13 @@ describe('Category Unit Test', () => {
     expect(category.props.is_active).toBe(false);
     expect(spy).toHaveBeenCalled();
   });
+  it("should be able to update a category's ", () => {
+    const category = new Category({ name: 'Category Name', description: 'any description' });
+    category.Update({
+      ...category,
+      name: 'Category Name 2',
+    })
+    expect(category.props.name).toEqual('Category Name 2');
+    expect(category.props.description).toEqual('any description');
+  })
 });

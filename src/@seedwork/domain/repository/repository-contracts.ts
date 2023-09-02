@@ -9,7 +9,7 @@ export interface RepositoryInterface<E extends Entity> {
   Delete(id: string | UniqueEntityId): Promise<void>;
 }
 
-type SortDirection = 'asc' | 'desc';
+export type SortDirection = 'asc' | 'desc';
 
 type SearchProps<Filter = string> = {
   page?: number;
@@ -96,7 +96,7 @@ type SearchResultsProps<E extends Entity, Filter> = {
   sort_dir: SortDirection | null;
   filter: Filter | null;
 };
-export class SearchResult<E extends Entity, Filter = string> {
+export class SearchResult<E extends Entity = Entity, Filter = string> {
   readonly items: E[];
   readonly total: number;
   readonly current_page: number;
