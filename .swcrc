@@ -1,0 +1,15 @@
+{
+  "jsc": {
+      "parser": {
+          "syntax": "typescript",
+          "decorators": true
+      },
+      "baseUrl": "src",
+      "keepClassNames": true,
+      "paths": {
+          "#core/*": [
+              "./core/*"
+          ]
+      }
+  }
+}
