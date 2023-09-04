@@ -4,12 +4,18 @@
           "syntax": "typescript",
           "decorators": true
       },
+      "target": "es2017",
       "baseUrl": "src",
       "keepClassNames": true,
+      "transform": {
+        "legacyDecorator": true,
+        "decoratorMetadata": true
+      },
       "paths": {
           "#core/*": [
               "./core/*"
           ]
       }
+      
   }
 }
